@@ -15,7 +15,10 @@ let charBox = 25
 
 
 function setup() {
-  createCanvas(1000, 800);
+  
+  createCanvas(800, 800);
+  
+  
   frameRate(60);
 }
 
