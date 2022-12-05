@@ -1,18 +1,21 @@
 // BOMB GAME
 
 
+// Time
+let time = 0;
+
 // HP bar
-let HP = 100
+let HP = 100;
 
 // starting position variables
-let charX = 50
-let charY = 200
+let charX = 50;
+let charY = 200;
 
 // character axial movement speed
-let charSpeed = 5
+let charSpeed = 5;
 
 //character hitbox radius
-let charBox = 25
+let charBox = 25;
 
 
 
@@ -33,9 +36,19 @@ function draw() {
   
   background('#183D3A');
   fill('#15D6C3');
-  rect(10, 80, (width - 25), (height - 100), 25);
+  rect(10, 80, (width - 20), (height - 100), 25);
   
   // BACKDROP
+  
+  // GAME CLOCK
+  
+  time = time + (1/60);
+  
+  stroke(0);
+  textSize(20);
+text(round(time, 2), 40, 73);
+  
+  // GAME CLOCK
   
   
     // MOVEMENT CODE
@@ -53,17 +66,28 @@ function draw() {
       charY = (charY + charSpeed);
   }
   // if D go right
-  if (keyIsDown(68) && (charX < (width - (charBox + 15)))) {
+  if (keyIsDown(68) && (charX < (width - (charBox + 10)))) {
       charX = (charX + charSpeed);
   }  
   
     // MOVEMENT CODE
+  
+    // BOMBS
+  
+    
+  
+    // BOMBS
+  
   
   
   // TEST
   
   if (keyIsDown(72) && (HP > 0)) {
     HP = HP - 1
+  }
+  
+  if (keyIsDown(84)) {
+    console.log(round(time, 1));
   }
   
   // TEST
@@ -78,9 +102,9 @@ function draw() {
   
     // DRAW HP
   
-  fill(0)
+  fill(0);
   rect(30, 30, 740, 20, 20);
-  fill('#FF0000')
+  fill('#FF0000');
   rect(30, 30, HP*7.4, 20, 20);
   
     // DRAW HP
