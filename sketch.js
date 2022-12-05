@@ -31,8 +31,8 @@ function draw() {
   
   // BACKDROP
   
-  background('#220333');
-  fill(255);
+  background('#183D3A');
+  fill('#15D6C3');
   rect(10, 80, (width - 25), (height - 100), 25);
   
   // BACKDROP
@@ -58,6 +58,15 @@ function draw() {
   }  
   
     // MOVEMENT CODE
+  
+  
+  // TEST
+  
+  if (keyIsDown(72) && (HP > 0)) {
+    HP = HP - 1
+  }
+  
+  // TEST
   
   
     // DRAW CHARACTER
