@@ -21,10 +21,10 @@ let charSpeed = 5;
 let charBox = 25;
 
 // The number of bombs to create
-const numBombs = 5;
+const numBombs = 10;
 
 // The speed and direction of each bomb
-const bombSpeed = 5;
+const bombSpeed = 8;
 const bombDirection = {
   x: 1,
   y: 1,
