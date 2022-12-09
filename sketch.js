@@ -9,8 +9,8 @@ let timeStart = 0;
 let HP = 100;
 
 // starting position variables
-let charX = 50;
-let charY = 200;
+let charX = 400;
+let charY = 400;
 let startX = 300;
 let startY = 350;
 
@@ -20,12 +20,37 @@ let charSpeed = 5;
 // character hitbox radius
 let charBox = 25;
 
+// The number of bombs to create
+const numBombs = 10;
+
+// The speed and direction of each bomb
+const bombSpeed = 1;
+const bombDirection = {
+  x: 1,
+  y: 1,
+};
+
+// An array to store the bombs
+let bombs = [];
+
 
 function setup() {
 
   createCanvas(800, 800);
 
   frameRate(60);
+  
+  
+  // Initialize the array of bombs
+for (let i = 0; i < numBombs; i++) {
+  // Add x and y direction variables to each bomb object
+  bombs.push({
+    x: random(width),
+    y: random(height),
+    xDirection: 1,
+    yDirection: 1,
+  });
+}
 
 // creating button
 let button;  
@@ -47,7 +72,7 @@ button.style('border-radius', '30px');
 function startGame(){
   timeStart = 1;
   button.remove()
-}
+  }
 }
 
 
@@ -101,8 +126,52 @@ if (timeStart === 1){
 
     // BOMBS
   
+  if (timeStart === 1){
   
+   // Update each bomb's position and check for collisions with the edges of the canvas
+  for (let i = 0; i < numBombs; i++) {
+    const bomb = bombs[i];
+
+    // Update the bomb's position
+    bomb.x += bombSpeed * bombDirection.x;
+    bomb.y += bombSpeed * bombDirection.y;
+
+   for (let i = 0; i < numBombs; i++) {
+  const bomb = bombs[i];
+
+  // Update the bomb's position
+  bomb.x += bombSpeed * bomb.xDirection;
+  bomb.y += bombSpeed * bomb.yDirection;
+
+  // Check for collisions with the edges of the canvas
+  if (bomb.x < 25 || bomb.x > (height - 25)) {
+    bomb.xDirection *= -1;
+  }
+  if (bomb.y < 80 || bomb.y > (height - 30)) {
+    bomb.yDirection *= -1;
+  }
+}
+  }
   
+ // Draw each bomb
+  for (let i = 0; i < numBombs; i++) {
+    const bomb = bombs[i];
+
+    // Calculate the distance between the bomb and the character
+    const d = dist(charX, charY, bomb.x, bomb.y);
+
+    if (d < 50) {
+      // The character is near the bomb, so draw it in red
+      fill(255, 0, 0);
+      HP = HP - 1;
+    } else {
+      // The character is far away from the bomb, so draw it in green
+      fill(0, 255, 0);
+    }
+
+    ellipse(bomb.x, bomb.y, 20, 20);
+  }
+  }
     // BOMBS
 
 
@@ -128,6 +197,10 @@ if (timeStart === 1){
     // DRAW CHARACTER
 
     // DRAW HP
+  
+  if (HP < 1) {
+    timeStart = 0;
+  }
 
   fill(0);
   rect(30, 30, 740, 20, 20);
@@ -139,6 +212,5 @@ if (timeStart === 1){
   if (timeStart === 1){
     gameTime = gameTime + (1/60);
   }
-  
-    // GAME TIMER
 }
+    // GAME TIMER
