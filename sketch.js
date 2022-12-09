@@ -155,7 +155,7 @@ for (let i = 0; i < numBombs; i++) {
     // Calculate the distance between the bomb and the character
     const d = dist(charX, charY, bomb.x, bomb.y);
 
-    if (d < 50) {
+    if (d < 30) {
       // The character is near the bomb, so draw it in red
       fill(255, 0, 0);
       HP = HP - 1;
@@ -164,24 +164,10 @@ for (let i = 0; i < numBombs; i++) {
       fill(0, 255, 0);
     }
 
-    ellipse(bomb.x, bomb.y, 20, 20);
+    ellipse(bomb.x, bomb.y, 30, 30);
   }
   }
     // BOMBS
-
-
-
-  // TEST
-
-  if (keyIsDown(72) && (HP > 0)) {
-    HP = HP - 1
-  }
-
-  if (keyIsDown(84)) {
-    console.log(round(gameTime, 1));
-  }
-
-  // TEST
 
   
     // DRAW CHARACTER
