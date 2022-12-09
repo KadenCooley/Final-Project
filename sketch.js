@@ -21,10 +21,10 @@ let charSpeed = 5;
 let charBox = 25;
 
 // The number of bombs to create
-const numBombs = 10;
+const numBombs = 5;
 
 // The speed and direction of each bomb
-const bombSpeed = 1;
+const bombSpeed = 5;
 const bombDirection = {
   x: 1,
   y: 1,
@@ -45,8 +45,8 @@ function setup() {
 for (let i = 0; i < numBombs; i++) {
   // Add x and y direction variables to each bomb object
   bombs.push({
-    x: random(width),
-    y: random(height),
+    x: random(30, (width - 30)),
+    y: random(150, (height - 50)),
     xDirection: 1,
     yDirection: 1,
   });
@@ -128,30 +128,25 @@ if (timeStart === 1){
   
   if (timeStart === 1){
   
-   // Update each bomb's position and check for collisions with the edges of the canvas
-  for (let i = 0; i < numBombs; i++) {
-    const bomb = bombs[i];
-
-    // Update the bomb's position
-    bomb.x += bombSpeed * bombDirection.x;
-    bomb.y += bombSpeed * bombDirection.y;
-
-   for (let i = 0; i < numBombs; i++) {
+  // Update each bomb's position and check for collisions with the edges of the canvas
+for (let i = 0; i < numBombs; i++) {
   const bomb = bombs[i];
 
   // Update the bomb's position
   bomb.x += bombSpeed * bomb.xDirection;
   bomb.y += bombSpeed * bomb.yDirection;
 
-  // Check for collisions with the edges of the canvas
-  if (bomb.x < 25 || bomb.x > (height - 25)) {
+  // Check if the bomb has reached the edge of the canvas
+  if (bomb.x >= (width - 25) || bomb.x <= 25) {
+    // If so, reverse the bomb's x direction
     bomb.xDirection *= -1;
   }
-  if (bomb.y < 80 || bomb.y > (height - 30)) {
+  if (bomb.y >= (height - 30) || bomb.y <= 90) {
+    // If so, reverse the bomb's y direction
     bomb.yDirection *= -1;
   }
 }
-  }
+  
   
  // Draw each bomb
   for (let i = 0; i < numBombs; i++) {
@@ -190,6 +185,7 @@ if (timeStart === 1){
 
   
     // DRAW CHARACTER
+  
 if (timeStart === 1){
   fill(255);
   circle(charX, charY, 50);
