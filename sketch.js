@@ -20,6 +20,16 @@ let charSpeed = 5;
 // character hitbox radius
 let charBox = 25;
 
+// game over screen
+let gameOverX = 1000;
+let gameOverY = 1000;
+let text1X = 1000;
+let text1Y = 1000;
+let text2X = 1000;
+let text2Y = 1000;
+let text3X = 1000;
+let text3Y = 1000;
+
 // The number of bombs to create
 const numBombs = 10;
 
@@ -32,7 +42,6 @@ const bombDirection = {
 
 // An array to store the bombs
 let bombs = [];
-
 
 function setup() {
 
@@ -52,7 +61,12 @@ for (let i = 0; i < numBombs; i++) {
   });
 }
 
-// creating button
+  function startGame(){
+    timeStart = 1;
+    button.remove('START!');
+  }
+  
+// creating start button
 let button;  
 
 button = createButton('START!');
@@ -68,16 +82,12 @@ button.style('background-color', 'green');
   
 // make the corners of the button round
 button.style('border-radius', '30px');
-
-function startGame(){
-  timeStart = 1;
-  button.remove()
-  }
+ 
 }
 
 
-function draw() {
 
+function draw() {
 
   // BACKDROP
   
@@ -194,5 +204,59 @@ if (timeStart === 1){
   if (timeStart === 1){
     gameTime = gameTime + (1/60);
   }
-}
+
     // GAME TIMER
+
+    // GAME OVER SCREEN
+    
+    // GAME OVER GRAPHIC
+    fill('green');
+    rect(gameOverX, gameOverY, 800, 800);
+    fill('white');
+    textSize(50);
+    textFont('comic sans ms');
+    text('GAME OVER!', text1X, text1Y);
+    text('Your Time: ' + minutes + ":" + nf(remainingSeconds, 2) + "." + round(tenthsOfSeconds), text2X, text2Y);
+    text('Click anywhere to continue...', text3X, text3Y);
+    // GAME OVER GRAPHIC
+  
+    // STAT RESET
+    if (HP === 0){
+      gameOverX = 0;
+      gameOverY = 0;
+      text1X = 225;
+      text1Y = 200;
+      text2X = 175;
+      text2Y = 300;
+      text3X = 75;
+      text3Y = 500;
+      if (mouseIsPressed === true){
+        HP = 100;
+        gameTime = 0;
+        gameOverX = 1000;
+        gameOverY = 1000;
+        text1X = 1000;
+        text1Y = 1000;
+        text2X = 1000;
+        text2Y = 1000;
+        text3X = 1000;
+        text3Y = 1000;
+        let button;  
+        button = createButton('START!');
+        button.position(300,350);
+        button.size(200, 100);
+        button.mousePressed(startGame2);
+        button.style('font-size', '50px');
+        button.style('background-color', 'green');
+        button.style('border-radius', '30px');
+        
+        function startGame2(){
+          timeStart = 1;
+          button.remove('START!');
+        }
+      }
+    }
+    // STAT RESET  
+  
+    // GAME OVER SCREEN
+}
